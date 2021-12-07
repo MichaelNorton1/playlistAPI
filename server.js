@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 let port = process.env.PORT || 8888;
-app.listen(port);
+app.listen(process.env.PORT);
 app.locals.data = {};
 app.post("/band", (req, res) => {
   if (req.body.band && req.body.yearOf) {
