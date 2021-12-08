@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 let port = process.env.PORT || 8888;
-app.listen(process.env.PORT);
+app.listen(port);
 app.locals.data = {};
 app.post("/band", (req, res) => {
   if (req.body.band && req.body.yearOf) {
@@ -39,7 +39,8 @@ app.post("/band", (req, res) => {
   }
 });
 
-let redirect_uri = process.env.REDIRECT_URI;
+let redirect_uri = "http://localhost:8888/callback/";
+
 app.get("/login", (req, res) => {
   var state = randomstring.generate(16);
   var scope = "user-read-private user-read-email playlist-modify-public";
