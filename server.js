@@ -15,6 +15,9 @@ app.use(express.json());
 let port = process.env.PORT || 8888;
 app.listen(port);
 app.locals.data = {};
+app.get("/", (req, res) => {
+  res.send("");
+});
 app.post("/band", (req, res) => {
   if (req.body.band && req.body.yearOf) {
     const formatBand = req.body.band;
