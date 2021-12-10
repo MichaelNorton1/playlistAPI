@@ -42,7 +42,8 @@ app.post("/band", (req, res) => {
   }
 });
 
-let redirect_uri = process.env.REDIRECT_URI || "http://localhost:8888/callback";
+let redirect_uri =
+  process.env.REDIRECT_URI || "http://localhost:8888/callback/";
 
 app.get("/login", (req, res) => {
   var state = randomstring.generate(16);
