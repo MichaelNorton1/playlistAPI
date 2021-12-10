@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 let port = process.env.PORT || 8888;
 app.listen(port);
+const change = [];
 app.locals.data = {};
 app.get("/", (req, res) => {
   res.send("");
