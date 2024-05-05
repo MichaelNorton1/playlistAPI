@@ -20,7 +20,6 @@ app.get("/", (req, res) => {
   res.send("");
 });
 app.post("/band", (req, res) => {
-  console.log(req);
   if (req.body.band && req.body.yearOf) {
     const formatBand = req.body.band;
     const yearOf = req.body.yearOf;
@@ -36,6 +35,7 @@ app.post("/band", (req, res) => {
         }
       )
       .then((resp) => {
+        console.log(resp.data.setlist);
         res.send(resp.data.setlist);
       })
       .catch((error) => res.send({ error: error.response.statusText }));
