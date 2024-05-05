@@ -39,7 +39,10 @@ app.post("/band", (req, res) => {
         console.log(resp.data.setlist);
         res.send(resp.data.setlist);
       })
-      .catch((error) => res.send({ error: error.response.statusText }));
+      .catch((error) => {
+        console.log(error);
+        res.send({ error: error.response.statusText });
+      });
   } else {
     res.send({ error: "error" });
   }
