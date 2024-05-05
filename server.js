@@ -28,7 +28,7 @@ app.post("/band", (req, res) => {
         `https://api.setlist.fm/rest/1.0/search/setlists?artistName=${formatBand}&year=${yearOf}`,
         {
           headers: {
-            "x-api-key": client.key,
+            "x-api-key": process.env.key,
             Accept: "application/json",
             "Content-Type": "application/json",
           },
@@ -53,7 +53,7 @@ app.get("/login", (req, res) => {
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
         response_type: "code",
-        client_id: client.client_id,
+        client_id: process.env.client_id,
         scope: scope,
         redirect_uri: redirect_uri,
         state: state,
@@ -83,9 +83,9 @@ app.get("/callback", function (req, res) {
       headers: {
         Authorization:
           "Basic " +
-          new Buffer(client.client_id + ":" + client.client_secret).toString(
-            "base64"
-          ),
+          new Buffer(
+            process.env.client_id + ":" + process.env.client_secret
+          ).toString("base64"),
       },
       json: true,
     };
