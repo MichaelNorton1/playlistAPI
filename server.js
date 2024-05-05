@@ -3,7 +3,7 @@ import express from "express";
 const app = express();
 import cors from "cors";
 import axios from "axios";
-import client from "./config.js";
+
 import querystring from "query-string";
 import randomstring from "randomstring";
 import request from "request";
