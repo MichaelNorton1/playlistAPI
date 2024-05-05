@@ -40,7 +40,6 @@ app.post("/band", (req, res) => {
       })
       .catch((error) => res.send({ error: error.response.statusText }));
   } else {
-    console.log(error);
     res.send({ error: "error" });
   }
 });
