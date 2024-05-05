@@ -68,7 +68,6 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/callback", function (req, res) {
-  console.log("hit");
   let code = req.query.code || null;
 
   let state = req.query.state || null;
@@ -98,7 +97,6 @@ app.get("/callback", function (req, res) {
     };
 
     request.post(authOptions, function (error, response, body) {
-      console.log(body, authoptions);
       let uri = "http://localhost:3000/";
       const access_token = body.access_token;
       res.redirect(uri + "?access_token=" + access_token);
