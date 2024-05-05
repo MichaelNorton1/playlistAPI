@@ -67,6 +67,7 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/callback", function (req, res) {
+  console.log("hit");
   let code = req.query.code || null;
 
   let state = req.query.state || null;
