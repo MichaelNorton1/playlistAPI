@@ -23,6 +23,7 @@ app.post("/band", (req, res) => {
   if (req.body.band && req.body.yearOf) {
     const formatBand = req.body.band;
     const yearOf = req.body.yearOf;
+    console.log(process.env.key);
     axios
       .get(
         `https://api.setlist.fm/rest/1.0/search/setlists?artistName=${formatBand}&year=${yearOf}`,
