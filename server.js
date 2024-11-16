@@ -13,7 +13,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 let port = process.env.PORT || 8888;
-app.listen(port);
+app.listen(port,() => console.log(`Running on Port ${port}`));
 const change = [];
 app.locals.data = {};
 app.get("/", (req, res) => {
