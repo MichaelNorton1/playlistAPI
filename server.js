@@ -17,7 +17,7 @@ app.listen(port,() => console.log(`Running on Port ${port}`));
 const change = [];
 app.locals.data = {};
 app.get("/", (req, res) => {
-  res.send("");
+  res.send("<h1>Hello World!</h1>");
 });
 app.post("/band", (req, res) => {
   if (req.body.band && req.body.yearOf) {
