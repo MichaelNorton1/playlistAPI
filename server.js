@@ -55,17 +55,12 @@ app.get("/login", (req, res) => {
   console.log(redirect_uri);
   var state = randomstring.generate(16);
   const scopes = [
-    "user-read-private",
-    "user-read-email",
+
     "playlist-read-private",
     "playlist-modify-public",
     "playlist-modify-private",
-    "user-library-read",
-    "user-library-modify",
-    "user-read-recently-played",
-    "user-read-playback-state",
-    "user-modify-playback-state",
-    "user-read-currently-playing"
+
+
   ].join(" ");
 
   res.redirect(
