@@ -107,9 +107,7 @@ app.get("/callback", function (req, res) {
     request.post(authOptions, function (error, response, body) {
       let uri = "https://setlist-playlist.vercel.app/";
 
-      if (referer.includes("localhost")) {
-        uri= "http://localhost:5173";
-      }
+
       const access_token = body.access_token;
       res.redirect(uri + "?access_token=" + access_token);
     });
