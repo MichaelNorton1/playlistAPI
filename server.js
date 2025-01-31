@@ -16,6 +16,20 @@ let port = process.env.PORT || 8888;
 app.listen(port,() => console.log(`Running on Port ${port}`));
 const change = [];
 app.locals.data = {};
+import 'dotenv/config';
+import { neon } from '@neondatabase/serverless';
+
+const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
+
+const sql = neon(`postgresql://${PGUSER}:${PGPASSWORD}@${PGHOST}/${PGDATABASE}?sslmode=require`);
+
+async function getPgVersion() {
+  const result = await sql`SELECT version()`;
+  console.log(result[0]);
+}
+
+getPgVersion();
+
 app.get("/", (req, res) => {
   res.send("<h1>API</h1>");
 });
