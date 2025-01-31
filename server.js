@@ -54,13 +54,26 @@ let redirect_uri =
 app.get("/login", (req, res) => {
   console.log(redirect_uri);
   var state = randomstring.generate(16);
-  var scope = "user-read-private user-read-email playlist-modify-public";
+  const scopes = [
+    "user-read-private",
+    "user-read-email",
+    "playlist-read-private",
+    "playlist-modify-public",
+    "playlist-modify-private",
+    "user-library-read",
+    "user-library-modify",
+    "user-read-recently-played",
+    "user-read-playback-state",
+    "user-modify-playback-state",
+    "user-read-currently-playing"
+  ].join(" ");
+
   res.redirect(
     "https://accounts.spotify.com/authorize?" +
       querystring.stringify({
         response_type: "code",
         client_id: process.env.client_id,
-        scope: scope,
+        scope: scopes,
         redirect_uri: redirect_uri,
         state: state,
       })
