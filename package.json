@@ -9,7 +9,7 @@
     "start:dev:": "nodemon server.js"
 
   },
-  "type": "module",
+
 
   "dependencies": {
 
