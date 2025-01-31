@@ -101,7 +101,7 @@ app.get("/callback", async function (req, res) {
                 error: "state_mismatch",
             })
         );
-        await logError(error, error.stack)
+        await logError(error, "calbback")
     } else {
         let authOptions = {
             url: "https://accounts.spotify.com/api/token",
@@ -123,7 +123,9 @@ app.get("/callback", async function (req, res) {
         request.post(authOptions, async function (error, response, body) {
             let uri = "https://setlist-playlist.vercel.app/";
 
-            await logError(error, error.stack)
+            if(error){
+              await logError(error,"calback")
+            }
 
 
             const access_token = body.access_token;
