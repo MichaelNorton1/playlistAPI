@@ -53,9 +53,10 @@ app.post("/band", (req, res) => {
         console.log(resp.data.setlist);
         res.send(resp.data.setlist);
       })
-      .catch((error) => {
+      .catch(async (error) => {
         console.log(error);
-        res.send({ error: error.response.statusText });
+        await logError(error, error.stack)
+        res.send({error: error.response.statusText});
       });
   } else {
     res.send({ error: "error" });
@@ -89,17 +90,18 @@ app.get("/login", (req, res) => {
   );
 });
 
-app.get("/callback", function (req, res) {
+app.get("/callback", async function (req, res) {
   let code = req.query.code || null;
 
   let state = req.query.state || null;
   if (state === null) {
     res.redirect(
-      "/#" +
+        "/#" +
         querystring.stringify({
           error: "state_mismatch",
         })
     );
+    await logError(error, error.stack)
   } else {
     let authOptions = {
       url: "https://accounts.spotify.com/api/token",
@@ -110,16 +112,18 @@ app.get("/callback", function (req, res) {
       },
       headers: {
         Authorization:
-          "Basic " +
-          new Buffer(
-            process.env.client_id + ":" + process.env.client_secret
-          ).toString("base64"),
+            "Basic " +
+            new Buffer(
+                process.env.client_id + ":" + process.env.client_secret
+            ).toString("base64"),
       },
       json: true,
     };
 
-    request.post(authOptions, function (error, response, body) {
+    request.post(authOptions, async function (error, response, body) {
       let uri = "https://setlist-playlist.vercel.app/";
+
+      await logError(error, error.stack)
 
 
       const access_token = body.access_token;
@@ -127,3 +131,12 @@ app.get("/callback", function (req, res) {
     });
   }
 });
+
+async function logError(message, stack) {
+  try {
+    await sql`INSERT INTO errors (message, stack) VALUES (${message}, ${stack})`;
+    console.log('Error logged successfully.');
+  } catch (dbError) {
+    console.error('Failed to log error:', dbError);
+  }
+}
