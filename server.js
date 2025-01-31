@@ -16,7 +16,7 @@ let port = process.env.PORT || 8888;
 app.listen(port,() => console.log(`Running on Port ${port}`));
 const change = [];
 app.locals.data = {};
-import 'dotenv/config';
+
 import { neon } from '@neondatabase/serverless';
 
 const { PGHOST, PGDATABASE, PGUSER, PGPASSWORD } = process.env;
