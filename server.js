@@ -55,7 +55,7 @@ app.post("/band", (req, res) => {
             })
             .catch(async (error) => {
                 console.log(error);
-                await logError(error, error.stack)
+                await logError(error, "callback error")
                 res.send({error: error.response.statusText});
             });
     } else {
